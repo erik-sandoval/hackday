@@ -1,6 +1,6 @@
 //Parent object for sprites
 class Populate {
-  constructor () {
+  constructor() {
     this.x = 0;
     this.y = 0;
     this.speed = 0;
@@ -8,12 +8,11 @@ class Populate {
     this.sideways = 101;
     this.upDown = 83;
   }
-
-  render () {
+  render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-  reset () {
+  reset() {
     this.x = 0;
     this.y = 415;
   }
@@ -21,21 +20,30 @@ class Populate {
 
 //Player class
 class Player extends Populate {
-  constructor () {
+  constructor() {
     super();
     this.x = 0;
     this.y = 415;
     this.sprite = "images/char-boy.png";
   }
 
-//key input for Player
-  handleInput (input) {
+  //key input for Player
+  handleInput(input) {
+    console.log(input);
     switch (input) {
       case "left":
         if (this.x >= this.sideways) {
           this.x -= this.sideways;
         }
+      case "a":
+        if (this.x >= this.sideways) {
+          this.x -= this.sideways;
+        }
         break;
+      case "d":
+        if (this.x <= this.sideways * 3) {
+          this.x += this.sideways;
+        }
       case "right":
         if (this.x <= this.sideways * 3) {
           this.x += this.sideways;
@@ -45,8 +53,16 @@ class Player extends Populate {
         if (this.y >= 83) {
           this.y -= this.upDown;
         }
+      case "w":
+        if (this.y >= 83) {
+          this.y -= this.upDown;
+        }
         break;
       case "down":
+        if (this.y <= this.upDown * 4) {
+          this.y += this.upDown;
+        }
+      case "s":
         if (this.y <= this.upDown * 4) {
           this.y += this.upDown;
         }
@@ -55,9 +71,13 @@ class Player extends Populate {
   }
 
   //updates player and sets condition for collision & win
-  update () {
+  update() {
     for (let enemy of allEnemies) {
-      if (this.y === enemy.y && (enemy.x + enemy.sideways / 2 > this.x && enemy.x < this.x + this.sideways / 2)) {
+      if (
+        this.y === enemy.y &&
+        (enemy.x + enemy.sideways / 2 > this.x &&
+          enemy.x < this.x + this.sideways / 2)
+      ) {
         this.reset();
       }
     }
@@ -71,7 +91,7 @@ const allEnemies = [];
 
 //Enemy class
 class Enemy extends Populate {
-  constructor (x, y, speed) {
+  constructor(x, y, speed) {
     super();
     this.x = x;
     this.y = y;
@@ -81,7 +101,7 @@ class Enemy extends Populate {
   }
 
   //Smooth movement of Enemy objects across gameboard
-  update (dt) {
+  update(dt) {
     if (this.x < this.sideways * 5) {
       this.x += this.speed * dt;
     } else {
@@ -98,8 +118,13 @@ const enemy4 = new Enemy(0, 83, 100);
 allEnemies.push(enemy1, enemy2, enemy3, enemy4);
 
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener("keyup", function (e) {
+document.addEventListener("keyup", function(e) {
+  
   var allowedKeys = {
+    87: "w",
+    65: "a",
+    83: "s",
+    68: "d",
     37: "left",
     38: "up",
     39: "right",
