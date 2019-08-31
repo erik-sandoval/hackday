@@ -35,6 +35,7 @@ class Player extends Populate {
         if (this.x >= this.sideways) {
           this.x -= this.sideways;
         }
+        break;
       case "a":
         if (this.x >= this.sideways) {
           this.x -= this.sideways;
@@ -44,6 +45,7 @@ class Player extends Populate {
         if (this.x <= this.sideways * 3) {
           this.x += this.sideways;
         }
+        break;
       case "right":
         if (this.x <= this.sideways * 3) {
           this.x += this.sideways;
@@ -53,6 +55,7 @@ class Player extends Populate {
         if (this.y >= 83) {
           this.y -= this.upDown;
         }
+        break;
       case "w":
         if (this.y >= 83) {
           this.y -= this.upDown;
@@ -62,6 +65,7 @@ class Player extends Populate {
         if (this.y <= this.upDown * 4) {
           this.y += this.upDown;
         }
+        break;
       case "s":
         if (this.y <= this.upDown * 4) {
           this.y += this.upDown;
@@ -119,7 +123,6 @@ allEnemies.push(enemy1, enemy2, enemy3, enemy4);
 
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener("keyup", function(e) {
-  
   var allowedKeys = {
     87: "w",
     65: "a",
