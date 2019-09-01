@@ -6,7 +6,7 @@
  * writing app.js a little simpler to work with.
  */
 
-var Engine = (function (global) {
+var Engine = (function(global) {
   var doc = global.document,
     win = global.window,
     canvas = doc.createElement("canvas"),
@@ -20,7 +20,7 @@ var Engine = (function (global) {
   /* This function serves as the kickoff point for the game loop itself
    * and handles properly calling the update and render methods.
    */
-  function main () {
+  function main() {
     /* Get our time delta information which is required if your game
      * requires smooth animation.
      */
@@ -43,10 +43,8 @@ var Engine = (function (global) {
     if (player.winAStar === true) {
       modal.style.display = "block";
       win.cancelAnimationFrame;
-
     } else {
       win.requestAnimationFrame(main);
-
     }
   }
 
@@ -54,7 +52,7 @@ var Engine = (function (global) {
    * particularly setting the lastTime variable that is required for the
    * game loop.
    */
-  function init () {
+  function init() {
     lastTime = Date.now();
     main();
   }
@@ -62,15 +60,15 @@ var Engine = (function (global) {
   /* This function is called by main (our game loop) and itself calls all
    * of the functions which may need to update entity's data. */
 
-  function update (dt) {
+  function update(dt) {
     updateEntities(dt);
   }
 
   /* This is called by the update function and loops through all of the
    * objects within your allEnemies array as defined in app.js
    */
-  function updateEntities (dt) {
-    allEnemies.forEach(function (enemy) {
+  function updateEntities(dt) {
+    allEnemies.forEach(function(enemy) {
       enemy.update(dt);
     });
     player.update();
@@ -79,21 +77,22 @@ var Engine = (function (global) {
   /* This function initially draws the "game level", it will then call
    * the renderEntities function.
    */
-  function render () {
+  function render() {
     /* This array holds the relative URL to the image used
      * for that particular row of the game level.
      */
     var rowImages = [
-        "images/water-block.png",   // Top row is water
-        "images/stone-block.png",   // Row 1 of 3 of stone
-        "images/stone-block.png",   // Row 2 of 3 of stone
-        "images/stone-block.png",   // Row 3 of 3 of stone
-        "images/grass-block.png",   // Row 1 of 2 of grass
-        "images/grass-block.png"    // Row 2 of 2 of grass
+        "images/water-block.png", // Top row is water
+        "images/stone-block.png", // Row 1 of 3 of stone
+        "images/stone-block.png", // Row 2 of 3 of stone
+        "images/stone-block.png", // Row 3 of 3 of stone
+        "images/grass-block.png", // Row 1 of 2 of grass
+        "images/grass-block.png" // Row 2 of 2 of grass
       ],
       numRows = 6,
       numCols = 5,
-      row, col;
+      row,
+      col;
 
     // Before drawing, clear existing canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -122,8 +121,8 @@ var Engine = (function (global) {
    * tick. Its purpose is to then call the render functions you have defined
    * on your enemy and player entities within app.js
    */
-  function renderEntities () {
-    allEnemies.forEach(function (enemy) {
+  function renderEntities() {
+    allEnemies.forEach(function(enemy) {
       enemy.render();
     });
 
@@ -137,6 +136,10 @@ var Engine = (function (global) {
     "images/grass-block.png",
     "images/enemy-bug.png",
     "images/char-boy.png",
+    "images/char-cat-girl.png",
+    "images/char-horn-girl.png",
+    "images/char-pink-girl.png",
+    "images/char-princess-girl.png",
     "images/Star.png"
   ]);
   Resources.onReady(init);

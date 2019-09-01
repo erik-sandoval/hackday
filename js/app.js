@@ -90,6 +90,20 @@ class Player extends Populate {
 
 const player = new Player();
 
+sprite = document.getElementsByClassName("sprite");
+
+console.log(sprite);
+
+spriteArr = Array.from(sprite);
+
+spriteArr.forEach(element => {
+  element.addEventListener("click", function() {
+    let id = element.getAttribute("id");
+    player.sprite = `images/${id}.png`;
+    player.reset();
+  });
+});
+
 //Array to hold Enemy objects
 const allEnemies = [];
 
