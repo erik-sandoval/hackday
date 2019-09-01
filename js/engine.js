@@ -14,7 +14,7 @@ var Engine = (function (global) {
     lastTime;
 
   canvas.width = 505;
-  canvas.height = 606;
+  canvas.height = 636;
   doc.body.appendChild(canvas);
 
   /* This function serves as the kickoff point for the game loop itself
@@ -98,6 +98,14 @@ var Engine = (function (global) {
     // Before drawing, clear existing canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Draw the scoreboard and life counter at bottom of page.
+    //ctx.fillStyle = "#F77";
+    //ctx.fillRect(0, 595, canvas.width, 38);
+    
+    // for (let counter = 0; counter < player.numLives; counter++) {
+    //   ctx.drawImage("images/Heart.png", counter * 34, 600, 34, 34);
+    // }
+
     /* Loop through the number of rows and columns we've defined above
      * and, using the rowImages array, draw the correct image for that
      * portion of the "grid"
@@ -137,7 +145,8 @@ var Engine = (function (global) {
     "images/grass-block.png",
     "images/enemy-bug.png",
     "images/char-boy.png",
-    "images/Star.png"
+    "images/Star.png",
+    "images/Heart.png"
   ]);
   Resources.onReady(init);
 

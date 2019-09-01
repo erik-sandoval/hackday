@@ -23,6 +23,8 @@ class Populate {
 class Player extends Populate {
   constructor () {
     super();
+    this.numLives = 0;
+    this.score = 0;
     this.x = 0;
     this.y = 415;
     this.sprite = "images/char-boy.png";
@@ -58,8 +60,17 @@ class Player extends Populate {
   update () {
     for (let enemy of allEnemies) {
       if (this.y === enemy.y && (enemy.x + enemy.sideways / 2 > this.x && enemy.x < this.x + this.sideways / 2)) {
+        this.numLives--;
         this.reset();
       }
+    }
+    if (this.numLives <= 0) {
+      this.numLives = 3;
+      this.score = 0;
+      this.reset();
+    }
+    if (this.y <= 1) {
+      this.score++;
     }
   }
 }
