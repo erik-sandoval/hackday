@@ -19,6 +19,15 @@ class Populate {
   }
 }
 
+//Lives class
+class Lives extends Populate {
+  constructor () {
+    this.x = 0;
+    this.y = 
+    this.sprite = "images/Heart.png";
+  }
+}
+
 //Player class
 class Player extends Populate {
   constructor () {
@@ -31,30 +40,51 @@ class Player extends Populate {
   }
 
 //key input for Player
-  handleInput (input) {
-    switch (input) {
-      case "left":
-        if (this.x >= this.sideways) {
-          this.x -= this.sideways;
-        }
-        break;
-      case "right":
-        if (this.x <= this.sideways * 3) {
-          this.x += this.sideways;
-        }
-        break;
-      case "up":
-        if (this.y >= 83) {
-          this.y -= this.upDown;
-        }
-        break;
-      case "down":
-        if (this.y <= this.upDown * 4) {
-          this.y += this.upDown;
-        }
-        break;
-    }
+handleInput(input) {
+  console.log(input);
+  switch (input) {
+    case "left":
+      if (this.x >= this.sideways) {
+        this.x -= this.sideways;
+      }
+      break;
+    case "a":
+      if (this.x >= this.sideways) {
+        this.x -= this.sideways;
+      }
+      break;
+    case "d":
+      if (this.x <= this.sideways * 3) {
+        this.x += this.sideways;
+      }
+      break;
+    case "right":
+      if (this.x <= this.sideways * 3) {
+        this.x += this.sideways;
+      }
+      break;
+    case "up":
+      if (this.y >= 83) {
+        this.y -= this.upDown;
+      }
+      break;
+    case "w":
+      if (this.y >= 83) {
+        this.y -= this.upDown;
+      }
+      break;
+    case "down":
+      if (this.y <= this.upDown * 4) {
+        this.y += this.upDown;
+      }
+      break;
+    case "s":
+      if (this.y <= this.upDown * 4) {
+        this.y += this.upDown;
+      }
+      break;
   }
+}
 
   //updates player and sets condition for collision & win
   update () {
@@ -76,6 +106,20 @@ class Player extends Populate {
 }
 
 const player = new Player();
+
+sprite = document.getElementsByClassName("sprite");
+
+console.log(sprite);
+
+spriteArr = Array.from(sprite);
+
+spriteArr.forEach(element => {
+  element.addEventListener("click", function() {
+    let id = element.getAttribute("id");
+    player.sprite = `images/${id}.png`;
+    player.reset();
+  });
+});
 
 //Array to hold Enemy objects
 const allEnemies = [];
@@ -111,6 +155,10 @@ allEnemies.push(enemy1, enemy2, enemy3, enemy4);
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener("keyup", function (e) {
   var allowedKeys = {
+    87: "w",
+    65: "a",
+    83: "s",
+    68: "d",
     37: "left",
     38: "up",
     39: "right",
